@@ -64,6 +64,10 @@ a {
     font-size: 1rem;
 }
 
+#login a {
+    color: #91a1a5;
+}
+
 nav li:hover {
     border-bottom-color: #bd6151;
 }
