@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylStore", "VinylStore\VinylStore.csproj", "{F8B625D7-E37F-43F7-AFA5-2B0357818AF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8B625D7-E37F-43F7-AFA5-2B0357818AF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B625D7-E37F-43F7-AFA5-2B0357818AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B625D7-E37F-43F7-AFA5-2B0357818AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B625D7-E37F-43F7-AFA5-2B0357818AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D39C50E2-BEAF-4AE5-894A-1F21BC82BD1F}
+	EndGlobalSection
+EndGlobal
