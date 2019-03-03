@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/site.css"/>
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div id="main-container">
+        <header id="header-container">
+            <a href="/Home/Index"><h1><i class="fa fa-bandcamp" aria-hidden="true"></i>contrabass</h1></a>
+            <nav>
+                <ul>
+                    <li><a href="products.html">продукти</a></li>
+                    <li><a href="register.html">включи се</a></li>
+                    <li><a href="/Home/About">контакти</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="content-container">
+            @RenderBody()
+        </main>
+    </div>
+    <footer id="footer-container">
+        <h3>&copy; 2017 contrabass.com</h3>
+    </footer>
+</body>
+</html>
