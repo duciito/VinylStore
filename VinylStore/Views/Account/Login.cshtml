@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Влез";
+}
+
+@section styles
+{
+    <link href="~/Content/css/register.css" rel="stylesheet" />
+}
+
+<section id="form-container">
+    <header>
+        <i class="fa fa-user-o" aria-hidden="true"></i>
+        <h2>Влез</h2>
+        <p>И си купи чудесни грамофонни плочи :).</p>
+    </header>
+
+    <div class="form">
+        <form action="" method="post">
+            <input type="text" placeholder="Никнейм" />
+            <input type="password" placeholder="Парола" />
+
+            <button>Влез</button>
+        </form>
+    </div>
+
+    <p>Нямаш акаунт? <a href="/Account/Register">Направи си.</a></p>
+</section>

@@ -8,8 +8,13 @@ namespace VinylStore.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
+        // GET: Account/Register
         public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
         {
             return View();
         }
