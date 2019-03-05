@@ -5,16 +5,15 @@
     padding: 2rem;
     text-align: center;
 }
-    #form-container a {
+    #form-container a, span {
         color: #91a1a5;
-        text-decoration: underline;
     }
 
     #form-container i {
         font-size: 3rem;
     }
 
-    #form-container p, label {
+    #form-container p, label, span {
         font-size: 1rem;
     }
 

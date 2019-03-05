@@ -1,4 +1,5 @@
-﻿@{
+﻿@model VinylStore.ViewModels.Account.RegisterVM
+@{
     ViewBag.Title = "Регистрация";
 }
 
@@ -16,13 +17,19 @@
 
 
     <div class="form">
-        <form action="" method="post">
-            <input type="text" placeholder="Никнейм"/>
-            <input type="text" placeholder="Име">
-            <input type="text" placeholder="Фамилия">
-            <input type="password" placeholder="Парола">
+        <form action="/Account/Register" method="post">
+            @Html.ValidationMessage("UsernameTaken")
 
-            <button>Регистрирация</button>
+            @Html.ValidationMessageFor(m => m.Username, null)
+            @Html.TextBoxFor(m => m.Username, new { placeholder = "Никнейм" })
+            @Html.ValidationMessageFor(m => m.FirstName, null)
+            @Html.TextBoxFor(m => m.FirstName, new { placeholder = "Име" })
+            @Html.ValidationMessageFor(m => m.LastName, null)
+            @Html.TextBoxFor(m => m.LastName, new { placeholder = "Фамилия" })
+            @Html.ValidationMessageFor(m => m.Password, null)
+            @Html.PasswordFor(m => m.Password, new { placeholder = "Парола" })
+
+            <button type="submit">Регистрирация</button>
         </form>
     </div>
 </section>

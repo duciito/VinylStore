@@ -1,4 +1,5 @@
-﻿@{
+﻿@model VinylStore.ViewModels.Account.LoginVM
+@{
     ViewBag.Title = "Влез";
 }
 
@@ -15,11 +16,15 @@
     </header>
 
     <div class="form">
-        <form action="" method="post">
-            <input type="text" placeholder="Никнейм" />
-            <input type="password" placeholder="Парола" />
+        <form action="/Account/Login" method="post">
+            @Html.ValidationMessage("AuthenticationFailed")
 
-            <button>Влез</button>
+            @Html.ValidationMessageFor(m => m.Username, null)
+            @Html.TextBoxFor(m => m.Username, new { placeholder = "Никнейм" })
+            @Html.ValidationMessageFor(m => m.Password, null)
+            @Html.PasswordFor(m => m.Password, new { placeholder = "Парола" })
+
+            <button type="submit">Влез</button>
         </form>
     </div>
 
