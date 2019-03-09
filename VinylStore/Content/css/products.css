@@ -27,12 +27,26 @@
 
 .products span {
     position: absolute;
-    padding: 0.8rem;
+    padding: 0.6rem;
     font-size: 1rem;
+    background: #f7f3de;
+    color: #bd6151;
+    top: 0;
+    left: 0;
+    font-weight: 700;
+}
+
+.products a {
+    position: absolute;
+    padding: 0.6rem;
+    font-size: 1rem;
+    appearance: button;
     background: #91a1a5;
     color: #f7f3de;
-    bottom: 0;
-    right: 0;
+    bottom: 0.7rem;
+    right: 0.7rem;
+    outline: 0;
+    border: 0;
 }
 
 .products div p:nth-child(3) {

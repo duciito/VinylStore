@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VinylStore.Entities;
+using VinylStore.Repositories;
+using VinylStore.ViewModels.Products;
 
 namespace VinylStore.Controllers
 {
@@ -11,79 +14,66 @@ namespace VinylStore.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View();
+            return View(new GenresRepository().GetAll(includes: g => g.Vinyls));
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            ProductsRepository productsRepo = new ProductsRepository();
+            GenresRepository genresRepo = new GenresRepository();
+            Product item = id == null ? new Product() : productsRepo.GetById(id.Value);
+
+            EditVM model = new EditVM();
+            model.Id = item.Id;
+            model.GenreId = item.GenreId;
+            model.Artist = item.Artist;
+            model.Title = item.Title;
+            model.Genres = new SelectList
+            (
+                genresRepo.GetAll(),
+                "Id",
+                "Name",
+                model.GenreId
+            );
+            model.Price = item.Price;
+            model.VinylImgPath = item.VinylImgPath;
+            model.OnSale = item.OnSale;
+
+            return View(model);
         }
 
-        // GET: Products/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Products/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Edit(EditVM model)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            if (!ModelState.IsValid)
+                return View(model);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ProductsRepository repo = new ProductsRepository();
+            Product item = new Product();
+
+            item.Id = model.Id;
+            item.GenreId = model.GenreId;
+            item.Artist = model.Artist;
+            item.Title = model.Title;
+            item.Price = (decimal)model.Price;
+            item.VinylImgPath = model.VinylImgPath;
+            item.OnSale = model.OnSale;
+
+            if (item.Id > 0)
+                repo.Update(item);
+            else
+                repo.Insert(item);
+
+            return RedirectToAction("Index", "Products");
         }
 
-        // GET: Products/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Products/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Products/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+            ProductsRepository repo = new ProductsRepository();
+            Product item = repo.GetById(id);
+            repo.Delete(item);
 
-        // POST: Products/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index", "Products");
         }
     }
 }

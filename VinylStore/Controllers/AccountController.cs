@@ -11,6 +11,11 @@ namespace VinylStore.Controllers
 {
     public class AccountController : Controller
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         // GET: /Account/Register
         public ActionResult Register()
         {
@@ -27,7 +32,7 @@ namespace VinylStore.Controllers
             User registeredUser = repo.GetFirstOrDefault(i => i.Username == model.Username);
 
             if (registeredUser != null)
-                ModelState.AddModelError("UsernameTaken", "This username is already taken!");
+                ModelState.AddModelError("UsernameTaken", "Това име вече съществува!");
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -62,7 +67,7 @@ namespace VinylStore.Controllers
             Session["loggedUser"] = repo.GetFirstOrDefault(i => i.Username == model.Username && i.Password == model.Password);
 
             if (Session["loggedUser"] == null)
-                ModelState.AddModelError("AuthenticationFailed", "Authentication failed!");
+                ModelState.AddModelError("AuthenticationFailed", "Въвели сте грешни данни!");
 
             if (!ModelState.IsValid)
                 return View(model);

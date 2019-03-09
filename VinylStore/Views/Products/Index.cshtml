@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<VinylStore.Entities.Genre>
+@{
     ViewBag.Title = "Продукти";
 }
 
@@ -7,136 +8,28 @@
     <link href="~/Content/css/products.css" rel="stylesheet" />
 }
 
-<section class="products">
-    <header>
-        <h2>Джаз</h2>
-    </header>
-    <article>
-        <div>
-            <img src="~/Content/img/elliot.jpg" alt="Elliot Galvin trio">
-            <p>Elliot Galvin trio</p>
-            <p>The Influencing Machine</p>
-            <p class="price">7.99 лв.</p>
-            <span>Ново!</span>
-        </div>
-        <div>
-            <img src="~/Content/img/catapult.jpg" alt="LTF">
-            <p>LTF</p>
-            <p>Catapult / Spiral</p>
-            <p class="price">5.69 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/mary.jpg" alt="Mary Halvorson octet">
-            <p>Mary Halvorson octet</p>
-            <p>Away With You</p>
-            <p class="price">9.49 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/zara.jpg" alt="Zara McFarlane">
-            <p>Zara McFarlane</p>
-            <p>Peace Begins Within</p>
-            <p class="price">4.99 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/vibe.jpg" alt="Iamddb">
-            <p>Iamddb</p>
-            <p>Vibe vol. 2</p>
-            <p class="price">8.99 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/sun.jpg" alt="Sun Ra">
-            <p>Sun Ra</p>
-            <p>Media Dreams</p>
-            <p class="price">10.99 лв.</p>
-        </div>
-    </article>
-</section>
-<section class="products">
-    <header>
-        <h2>Блус</h2>
-    </header>
-    <article>
-        <div>
-            <img src="~/Content/img/steve.jpg" alt="Steve Blum">
-            <p>Steve Blum</p>
-            <p>Phases</p>
-            <p class="price">8.49 лв.</p>
-            <span>Ново!</span>
-        </div>
-        <div>
-            <img src="~/Content/img/fresh.jpg" alt="Homeshake">
-            <p>Homeshake</p>
-            <p>Fresh Air</p>
-            <p class="price">7.19 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/cuphead.jpg" alt="Kristofer Maddigan">
-            <p>Kristofer Maddigan</p>
-            <p>Cuphead</p>
-            <p class="price">11.99 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/wisdom.jpg" alt="Shabaka and TA">
-            <p>Shabaka And The Ancestors</p>
-            <p>Wisdom Of Elders</p>
-            <p class="price">9.99 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/owl.jpg" alt="Tuba Skinny">
-            <p>Tuba Skinny</p>
-            <p>Owl Call Blues</p>
-            <p class="price">14.99 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/carolina.jpg" alt="Carolina Reapers Swing">
-            <p>Carolina Reapers Swing</p>
-            <p>Unreasonably Hot</p>
-            <p class="price">8.49 лв.</p>
-        </div>
-    </article>
-</section>
-<section class="products">
-    <header>
-        <h2>Фънк</h2>
-    </header>
-    <article>
-        <div>
-            <img src="~/Content/img/keenan.jpg" alt="Keenan McKenzie">
-            <p>Keenan McKenzie</p>
-            <p>Forged In Rhythm</p>
-            <p class="price">9.99 лв.</p>
-            <span>Ново!</span>
-        </div>
-        <div>
-            <img src="~/Content/img/ghost.jpg" alt="Ghost">
-            <p>Ghost</p>
-            <p>Snapshot</p>
-            <p class="price">6.89 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/dojo.jpg" alt="Dojo Cuts">
-            <p>Dojo Cuts</p>
-            <p>Take From Me</p>
-            <p class="price">12.49 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/jelly.jpg" alt="Smerin's Anti-Social Club">
-            <p>Smerin's Anti-Social Club</p>
-            <p>Jelly Deals</p>
-            <p class="price">8.99 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/kering.jpg" alt="Tetelepta & Lekatompessy">
-            <p>Tetelepta & Lekatompessy</p>
-            <p>Kering#004</p>
-            <p class="price">10.49 лв.</p>
-        </div>
-        <div>
-            <img src="~/Content/img/super.jpg" alt="Omega Supreme Records">
-            <p>Omega Supreme Records</p>
-            <p>Superstructure</p>
-            <p class="price">7.89 лв.</p>
-        </div>
-    </article>
-</section>
+@foreach(Genre genre in Model)
+{
+    <section class="products">
+        <header>
+            <h2>@genre.Name</h2>
+        </header>
+        <article>
+            @foreach(Product product in genre.Vinyls)
+            {
+                <div>
+                    <img src="@product.VinylImgPath" alt="@product.Title" />
+                    <p>@product.Artist</p>
+                    <p>@product.Title</p>
+                    <p class="price">@product.Price лв.</p>
 
+                    @if (product.OnSale)
+                    {
+                        <span>Промоция!</span>
+                    }
+                    <a href="/Products/Edit/@product.Id">Редактирай</a>
+                </div>
+            }
+        </article>
+    </section>
+}

@@ -5,12 +5,13 @@
     padding: 2rem;
     text-align: center;
 }
+
     #form-container a, span {
         color: #91a1a5;
     }
 
     #form-container i {
-        font-size: 3rem;
+        font-size: 4rem;
     }
 
     #form-container p, label, span {
@@ -25,7 +26,7 @@
     flex-wrap: wrap;
 }
 
-    .form input:not([type="checkbox"]) {
+    .form input:not([type="checkbox"]), select {
         color: #91a1a5;
         display: block;
         width: 100%;
@@ -41,13 +42,13 @@
     margin-top: 0.4rem;
 }
 
-.input-group label {
-    float: left;
-}
+    .input-group label {
+        float: left;
+    }
 
-.input-group span {
-    float: right;
-}
+    .input-group span {
+        float: right;
+    }
 
 .form button {
     display: block;
@@ -61,13 +62,22 @@
     margin-top: 2.5rem;
 }
 
-.form button:hover {
-    background: #627478;
+    .form button:hover {
+        background: #627478;
+    }
+
+
+.form button:last-child {
+    margin: 1.25rem 0 0.8rem 0;
+    background: #bd6151;
 }
+
+    .form button:last-child:hover {
+        background: #7c291c;
+    }
 
 @media only screen and (min-width: 577px) and (max-width : 768px) {
     #form-container {
         max-width: 550px;
     }
 }
-

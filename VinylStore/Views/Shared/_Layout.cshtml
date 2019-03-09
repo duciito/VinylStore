@@ -16,6 +16,12 @@
             <a href="/Home/Index"><h1><i class="fa fa-bandcamp" aria-hidden="true"></i>contrabass</h1></a>
             <nav>
                 <ul>
+                    @if (Session["loggedUser"] != null)
+                    {
+                        <li>
+                            <a href="/Account/Index">профил</a>
+                        </li>
+                    }
                     <li><a href="/Products/Index">продукти</a></li>
                     <li><a href="/Home/About">контакти</a></li>
                     <li id="login">

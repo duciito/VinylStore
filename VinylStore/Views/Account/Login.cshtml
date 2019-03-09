@@ -19,10 +19,19 @@
         <form action="/Account/Login" method="post">
             @Html.ValidationMessage("AuthenticationFailed")
 
-            @Html.ValidationMessageFor(m => m.Username, null)
-            @Html.TextBoxFor(m => m.Username, new { placeholder = "Никнейм" })
-            @Html.ValidationMessageFor(m => m.Password, null)
-            @Html.PasswordFor(m => m.Password, new { placeholder = "Парола" })
+            <div class="input-group">
+                @Html.LabelFor(m => m.Username)
+                @Html.ValidationMessageFor(m => m.Username, null)
+                <div style="clear: both;"></div>
+                @Html.TextBoxFor(m => m.Username)
+            </div>
+
+            <div class="input-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password, null)
+                <div style="clear: both;"></div>
+                @Html.PasswordFor(m => m.Password)
+            </div>
 
             <button type="submit">Влез</button>
         </form>

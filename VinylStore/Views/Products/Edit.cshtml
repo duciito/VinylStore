@@ -1,0 +1,73 @@
+﻿@model VinylStore.ViewModels.Products.EditVM
+@{
+    ViewBag.Title = "Редактирай продукт";
+}
+
+@section styles
+{
+    <link href="~/Content/css/edit.css" rel="stylesheet" />
+}
+
+    <section id="form-container">
+        <header>
+            <i class="fa fa-bullseye"></i>
+            <h2>Редактирай продукт</h2>
+        </header>
+
+
+        <div class="form">
+            <form action="/Products/Edit" method="post">
+                @Html.HiddenFor(m => m.Id)
+
+                <div class="input-group">
+                    @Html.LabelFor(m => m.Artist)
+                    @Html.ValidationMessageFor(m => m.Artist, null)
+                    <div style="clear: both;"></div>
+                    @Html.TextBoxFor(m => m.Artist)
+                </div>
+
+                <div class="input-group">
+                    @Html.LabelFor(m => m.Title)
+                    @Html.ValidationMessageFor(m => m.Title, null)
+                    <div style="clear: both;"></div>
+                    @Html.TextBoxFor(m => m.Title)
+                </div>
+
+                <div class="input-group">
+                    @Html.LabelFor(m => m.GenreId)
+                    @Html.ValidationMessageFor(m => m.GenreId, null)
+                    <div style="clear: both;"></div>
+                    @Html.DropDownListFor(m => m.GenreId, Model.Genres)
+                </div>
+
+                <div class="input-group">
+                    @Html.LabelFor(m => m.Price)
+                    @Html.ValidationMessageFor(m => m.Price, null)
+                    <div style="clear: both;"></div>
+                    @Html.TextBoxFor(m => m.Price)
+                </div>
+
+                <div class="input-group">
+                    @Html.LabelFor(m => m.VinylImgPath)
+                    @Html.ValidationMessageFor(m => m.VinylImgPath, null)
+                    <div style="clear: both;"></div>
+                    @Html.TextBoxFor(m => m.VinylImgPath)
+                </div>
+
+                <div class="input-group">
+                    @Html.LabelFor(m => m.OnSale)
+                    @Html.ValidationMessageFor(m => m.OnSale, null)
+                    <div style="clear: both;"></div>
+                    @Html.DropDownListFor(m => m.OnSale, new SelectList(Model.Options, "Key", "Value"))
+                </div>
+
+
+                <button type="submit">Редактирай</button>
+                <button type="submit" formaction="/Products/Delete">Изтрий</button>
+            </form>
+        </div>
+        <p><a href="/Products/Index">Върни се обратно.</a></p>
+    </section>
+
+
+

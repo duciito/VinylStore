@@ -29,13 +29,18 @@ namespace VinylStore.Repositories
             return items.Where(i => i.Id == id).FirstOrDefault();
         }
 
-        public List<T> GetAll(Expression<Func<T, bool>> filter=null)
+        public List<T> GetAll(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = items;
-            
+
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
             }
 
             return query.ToList();
