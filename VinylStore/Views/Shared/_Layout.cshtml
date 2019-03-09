@@ -16,7 +16,13 @@
             <a href="/Home/Index"><h1><i class="fa fa-bandcamp" aria-hidden="true"></i>contrabass</h1></a>
             <nav>
                 <ul>
-                    @if (Session["loggedUser"] != null)
+                    @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 2)
+                    {
+                        <li>
+                            <a href="/Account/AdminPanel">панел</a>
+                        </li>
+                    }
+                    else if (Session["loggedUser"] != null)
                     {
                         <li>
                             <a href="/Account/Index">профил</a>

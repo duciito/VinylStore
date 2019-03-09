@@ -49,6 +49,10 @@
     border: 0;
 }
 
+#edit {
+    background: #bd6151;
+}
+
 .products div p:nth-child(3) {
     font-weight: 400;
 }

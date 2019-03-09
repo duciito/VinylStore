@@ -19,6 +19,9 @@ namespace VinylStore.Controllers
         // GET: /Account/Register
         public ActionResult Register()
         {
+            if (Session["loggedUser"] != null)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
 
@@ -53,6 +56,9 @@ namespace VinylStore.Controllers
 
         public ActionResult Login()
         {
+            if (Session["loggedUser"] != null)
+                return RedirectToAction("Index", "Home");
+
             LoginVM model = new LoginVM();
             return View(model);
         }

@@ -4,14 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VinylStore.Entities;
+using VinylStore.Filters;
 using VinylStore.Repositories;
 using VinylStore.ViewModels.Products;
 
 namespace VinylStore.Controllers
 {
+    [AuthorizationFilter]
     public class ProductsController : Controller
     {
         // GET: Products
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(new GenresRepository().GetAll(includes: g => g.Vinyls));

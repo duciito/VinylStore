@@ -17,18 +17,25 @@
         <article>
             @foreach(Product product in genre.Vinyls)
             {
-                <div>
-                    <img src="@product.VinylImgPath" alt="@product.Title" />
-                    <p>@product.Artist</p>
-                    <p>@product.Title</p>
-                    <p class="price">@product.Price лв.</p>
+            <div>
+                <img src="@product.VinylImgPath" alt="@product.Title" />
+                <p>@product.Artist</p>
+                <p>@product.Title</p>
+                <p class="price">@product.Price лв.</p>
 
-                    @if (product.OnSale)
-                    {
-                        <span>Промоция!</span>
-                    }
-                    <a href="/Products/Edit/@product.Id">Редактирай</a>
-                </div>
+                @if (product.OnSale)
+                {
+                    <span>Промоция!</span>
+                }
+                @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 2)
+                {
+                    <a id="edit" href="/Products/Edit/@product.Id">Редактирай</a>
+                }
+                else
+                {
+                    <a href="">Добави</a>
+                }
+            </div>
             }
         </article>
     </section>

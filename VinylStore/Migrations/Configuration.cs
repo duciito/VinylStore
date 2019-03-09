@@ -10,7 +10,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "VinylStore.Repositories.VinylStoreDbContext";
         }
 
@@ -206,6 +206,14 @@
                 Price = 7.89m,
                 VinylImgPath = "/Content/img/super.jpg",
                 OnSale = false
+            });
+
+            context.Users.AddOrUpdate(u => u.Id, new User
+            {
+                FirstName = "Admin",
+                LastName = "Admin",
+                Username = "admin",
+                Password = "admin"
             });
 
             base.Seed(context);
