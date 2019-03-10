@@ -25,7 +25,7 @@
                     else if (Session["loggedUser"] != null)
                     {
                         <li>
-                            <a href="/Account/Index">профил</a>
+                            <a class="dynamic-badge" data-badge="@(Session[string.Format("cart{0}", ((User)Session["loggedUser"]).Id.ToString())] != null ? (((Dictionary<int, int>)Session[string.Format("cart{0}", ((User)Session["loggedUser"]).Id.ToString())]).Sum(x => x.Value)) : 0)" href="/Account/Index">профил</a>
                         </li>
                     }
                     <li><a href="/Products/Index">продукти</a></li>

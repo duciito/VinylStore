@@ -24,9 +24,9 @@
             Genre blues = new Genre { Name = "Блус" };
             Genre funk = new Genre { Name = "Фънк" };
 
-            context.Genres.AddOrUpdate(g => g.Name, jazz);
-            context.Genres.AddOrUpdate(g => g.Name, blues);
-            context.Genres.AddOrUpdate(g => g.Name, funk);
+            context.Genres.AddOrUpdate(g => g.Id, jazz);
+            context.Genres.AddOrUpdate(g => g.Id, blues);
+            context.Genres.AddOrUpdate(g => g.Id, funk);
 
             context.Products.AddOrUpdate(p => p.Id, new Product
             {

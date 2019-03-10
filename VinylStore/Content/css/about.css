@@ -21,6 +21,10 @@ p {
             padding: 2rem 0;
         }
 
+#footer-container {
+    margin-top: 6.6rem;
+}
+
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
     iframe {
         width: 340px;

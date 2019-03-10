@@ -12,10 +12,16 @@ html, body {
     color: #bd6151;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 #main-container {
     width: 75%;
     margin: 0 auto;
     padding: 0;
+    flex: 1 0 auto;
 }
 
 #header-container {
@@ -72,13 +78,34 @@ nav li:hover {
     border-bottom-color: #bd6151;
 }
 
+.dynamic-badge {
+    position: relative;
+}
+
+    .dynamic-badge[data-badge]:after {
+        content: attr(data-badge);
+        position: absolute;
+        top: -0.8rem;
+        left: -1rem;
+        font-size: 0.6rem;
+        font-weight: 600;
+        text-align: center;
+        line-height: 21px;
+        background: #91a1a5;
+        color: #f7f3de;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+    }
+
 #footer-container {
     padding: 1%;
-    margin-top: 6.6rem;
+    margin-top: 5.6rem;
     background: #91a1a5;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
 @media only screen and (min-width: 993px) and (max-width : 1200px) {

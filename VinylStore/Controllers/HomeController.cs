@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VinylStore.Entities;
 
 namespace VinylStore.Controllers
 {
@@ -19,6 +20,5 @@ namespace VinylStore.Controllers
         {
             return View();
         }
-
     }
 }
