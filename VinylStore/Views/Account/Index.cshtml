@@ -1,47 +1,43 @@
-﻿@{
-    ViewBag.Title = "Профил";
-}
+﻿@model VinylStore.ViewModels.Account.IndexVM
+    @{
+        ViewBag.Title = "Профил";
+    }
 
-@section styles
+    @section styles
 {
-    <link href="~/Content/css/products.css" rel="stylesheet" />
-}
+        <link href="~/Content/css/home.css" rel="stylesheet" />
+    }
 
-<section class="products">
-    <header>
-        <h2>fsdfdsf</h2>
-    </header>
-    <article>
-        <div>
-            <p class="price">fdsdfsdf</p>
-
-            <a href="">Добави</a>
-        </div>
-    </article>
-</section>
-
-<section class="products">
-    <header>
-        <h2>fsdfdsf</h2>
-    </header>
-    <article>
-        <div>
-            <p class="price">fdsdfsdf</p>
-
-            <a href="">Добави</a>
-        </div>
-    </article>
-</section>
-
-<section class="products">
-    <header>
-        <h2>fsdfdsf</h2>
-    </header>
-    <article>
-        <div>
-            <p class="price">fdsdfsdf</p>
-
-            <a href="">Добави</a>
-        </div>
-    </article>
-</section>
+    <section class="news">
+        <header>
+            <h2>Кошница</h2>
+        </header>
+        <article>
+            @if (Model == null)
+            {
+                <p>Нямате нищо в кошницата!</p>
+            }
+            else
+            {
+                <table>
+                    <tr>
+                        <th>Артист/група</th>
+                        <th>Заглавие</th>
+                        <th>Жанр</th>
+                        <th>Промоция</th>
+                        <th>Цена</th>
+                    </tr>
+                    @foreach(KeyValuePair<Product, int> cartItem in Model.CartProducts)
+                    {
+                        <tr>
+                            <td>@cartItem.Key.Artist</td>
+                            <td>@cartItem.Key.Title</td>
+                            <td>djaz</td>
+                            <td>@(cartItem.Key.OnSale ? "Да" : "Не")</td>
+                            <td>@(cartItem.Key.Price*cartItem.Value)</td>
+                        </tr>
+                    }
+                </table>
+            }
+        </article>
+    </section>

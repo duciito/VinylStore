@@ -50,7 +50,7 @@ namespace VinylStore.Controllers
         {
             if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
             {
-                return new HttpNotFoundResult("You haven't added anything to the car yet!");
+                return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
             Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
@@ -72,7 +72,7 @@ namespace VinylStore.Controllers
         {
             if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
             {
-                return new HttpNotFoundResult("You haven't added anything to the car yet!");
+                return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
             Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];

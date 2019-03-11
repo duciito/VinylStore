@@ -151,6 +151,7 @@
     <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="Repositories\ProductsRepository.cs" />
     <Compile Include="Repositories\VinylStoreDbContext.cs" />
+    <Compile Include="ViewModels\Account\IndexVM.cs" />
     <Compile Include="ViewModels\Account\LoginVM.cs" />
     <Compile Include="ViewModels\Account\RegisterVM.cs" />
     <Compile Include="ViewModels\Products\EditVM.cs" />

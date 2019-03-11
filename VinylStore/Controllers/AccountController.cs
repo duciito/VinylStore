@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VinylStore.Entities;
+using VinylStore.Filters;
 using VinylStore.Repositories;
 using VinylStore.ViewModels.Account;
 
@@ -11,9 +12,27 @@ namespace VinylStore.Controllers
 {
     public class AccountController : Controller
     {
+        [AuthenticationFilter]
         public ActionResult Index()
         {
-            return View();
+            IndexVM model = new IndexVM();
+            if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
+            {
+                model = null;
+            }
+            else
+            {
+                ProductsRepository productsRepo = new ProductsRepository();
+                Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+                model.CartProducts = new Dictionary<Product, int>();
+
+                foreach (KeyValuePair<int, int> cartItem in cart)
+                {
+                    model.CartProducts.Add(productsRepo.GetById(cartItem.Key, includes: p => p.Genre), cartItem.Value);
+                }
+            }
+            
+            return View(model);
         }
 
         // GET: /Account/Register
