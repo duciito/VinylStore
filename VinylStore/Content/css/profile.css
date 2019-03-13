@@ -1,0 +1,133 @@
+﻿h2 {
+    text-align: center;
+}
+
+.cart > header {
+    margin-top: 5.5rem;
+    padding-bottom: 3.3rem;
+}
+
+.cart article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cart table, th, td {
+    background: #f7f3de;
+    padding: 0.7rem;
+    text-align: center;
+    border-collapse: collapse;
+    border-bottom: 0.4rem solid #91a1a5;
+    font-size: 1rem;
+    margin-left: 2rem;
+}
+
+.cart table, .cart tr:last-child td {
+    text-align: right;
+    border-bottom: none;
+}
+
+.cart img {
+    max-width: 6rem;
+    height: auto;
+}
+
+.cart a {
+    display: inline-block;
+    padding: 0.6rem;
+    appearance: button;
+    background: #91a1a5;
+    color: #f7f3de;
+    outline: 0;
+    border: 0;
+    text-align: center;
+}
+
+#delete {
+    background: #bd6151;
+}
+
+.orders > header {
+    margin-top: 5.5rem;
+    padding-bottom: 3.2rem;
+}
+
+.empty {
+    width: 100%;
+    text-align: center;
+}
+
+.orders article {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.orders img {
+    max-width: 100%;
+    height: auto;
+}
+
+.orders div:not(.empty) p {
+    font-size: 1rem;
+    margin-left: 20px;
+    font-weight: 600;
+}
+
+.orders a {
+    position: absolute;
+    padding: 0.6rem;
+    font-size: 1rem;
+    appearance: button;
+    background: #91a1a5;
+    color: #f7f3de;
+    bottom: 0.7rem;
+    right: 0.7rem;
+    outline: 0;
+    border: 0;
+}
+
+.orders div:not(.empty) p:nth-child(3) {
+    font-weight: 400;
+}
+
+.price {
+    color: #91a1a5;
+    margin-top: 50px;
+}
+
+.orders article div:not(.empty) {
+    position: relative;
+    flex-basis: 30%;
+    background: #f7f3de;
+    margin: 30px 0 0 30px;
+}
+
+@media only screen and (min-width: 993px) and (max-width : 1200px) {
+    .orders article div:not(.empty) {
+        flex-basis: 30%;
+        margin: 20px 0 0 20px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width : 992px) {
+    .orders article div:not(.empty) {
+        flex-basis: 44%;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width : 768px) {
+    .orders article div:not(.empty) {
+        flex-basis: 44%;
+    }
+}
+
+@media only screen and (max-width : 576px) {
+    .orders article div:not(.empty) {
+        flex-basis: 100%;
+        margin: 30px 0 0 0;
+    }
+}

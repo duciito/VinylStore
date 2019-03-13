@@ -12,6 +12,8 @@ namespace VinylStore.Repositories
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public VinylStoreDbContext()
             : base(@"Server=DESKTOP-LMH9NVO;Database=VinylStore;Trusted_Connection=True;")
@@ -19,6 +21,8 @@ namespace VinylStore.Repositories
             Users = Set<User>();
             Products = Set<Product>();
             Genres = Set<Genre>();
+            Orders = Set<Order>();
+            OrderItems = Set<OrderItem>();
         }
     }
 

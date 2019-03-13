@@ -1,0 +1,55 @@
+﻿h2 {
+    text-align: center;
+}
+
+.order > header {
+    margin-top: 5.5rem;
+    padding-bottom: 3.3rem;
+}
+
+.order article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.order table, th, td {
+    background: #f7f3de;
+    padding: 0.7rem;
+    text-align: center;
+    border-collapse: collapse;
+    border-bottom: 0.4rem solid #91a1a5;
+    font-size: 1rem;
+    margin-left: 2rem;
+}
+
+.order table, .order tr:last-child td {
+    text-align: right;
+    border-bottom: none;
+}
+
+    .order table, .order tr:last-child td:first-child, .order table, .order tr:last-child td:nth-child(2) {
+        text-align: center;
+        border-bottom: none;
+    }
+
+.order img {
+    max-width: 6rem;
+    height: auto;
+}
+
+.order a {
+    color: #91a1a5;
+}
+
+#delete {
+    display: inline-block;
+    padding: 0.6rem;
+    appearance: button;
+    color: #f7f3de;
+    outline: 0;
+    border: 0;
+    text-align: center;
+    background: #bd6151;
+}

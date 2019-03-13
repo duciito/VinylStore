@@ -12,7 +12,13 @@
 {
     <section class="products">
         <header>
-            <h2>@genre.Name</h2>
+            <h2>
+                @genre.Name
+                @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 1)
+                {
+                    <a class="add" href="/Products/Edit">(добави продукт)</a>
+                }
+            </h2>
         </header>
         <article>
             @foreach(Product product in genre.Vinyls)
@@ -27,7 +33,7 @@
                 {
                     <span>Промоция!</span>
                 }
-                @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 2)
+                @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 1)
                 {
                     <a id="edit" href="/Products/Edit/@product.Id">Редактирай</a>
                 }

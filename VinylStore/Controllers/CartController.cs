@@ -16,34 +16,35 @@ namespace VinylStore.Controllers
         public ActionResult Add(int id)
         {
             ProductsRepository repo = new ProductsRepository();
+            Product product = repo.GetById(id, includes: p => p.Genre);
 
-            if (repo.GetById(id) == null)
+            if (product == null)
             {
                 return new HttpNotFoundResult("There is no such product!");
             }
 
+            Dictionary<Product, int> cart;
             if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
             {
-                Dictionary<int, int> cart = new Dictionary<int, int>();
-                cart.Add(id, 1);
+                cart = new Dictionary<Product, int>();
+                cart.Add(product, 1);
                 Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart;
             }
             else
             {
-                Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+                cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
                 
-                if (cart.ContainsKey(id))
+                if (cart.ContainsKey(product))
                 {
-                    cart[id]++;
+                    cart[product]++;
                 }
                 else
                 {
-                    cart.Add(id, 1);
+                    cart.Add(product, 1);
                 }
                 Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart;
             }
-
-            return RedirectToAction("Index", "Products");
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult RemoveByOne(int id)
@@ -53,13 +54,15 @@ namespace VinylStore.Controllers
                 return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
-            Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+            ProductsRepository repo = new ProductsRepository();
+            Product product = repo.GetById(id, includes: p => p.Genre);
+            Dictionary<Product, int> cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
 
-            if (cart.ContainsKey(id) && cart[id] > 1)
+            if (cart.ContainsKey(product) && cart[product] > 1)
             {
-                cart[id]--;
+                cart[product]--;
             }
-            else if (cart.ContainsKey(id) && cart[id] == 1)
+            else if (cart.ContainsKey(product) && cart[product] == 1)
             {
                 return RedirectToAction("Remove", new { id = id });
             }
@@ -75,13 +78,15 @@ namespace VinylStore.Controllers
                 return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
-            Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+            ProductsRepository repo = new ProductsRepository();
+            Product product = repo.GetById(id, includes: p => p.Genre);
+            Dictionary<Product, int> cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
 
-            if (cart.ContainsKey(id))
+            if (cart.ContainsKey(product))
             {
-                cart.Remove(id);
+                cart.Remove(product);
             }
-            Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart;
+            Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart.Count == 0 ? null : cart;
 
             return RedirectToAction("Index", "Account");
         }

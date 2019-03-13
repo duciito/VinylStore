@@ -1,43 +1,99 @@
 ﻿@model VinylStore.ViewModels.Account.IndexVM
-    @{
-        ViewBag.Title = "Профил";
-    }
+@{
+    ViewBag.Title = "Профил";
+}
 
-    @section styles
+@section styles
 {
-        <link href="~/Content/css/home.css" rel="stylesheet" />
-    }
+    <link href="~/Content/css/profile.css" rel="stylesheet" />
+}
 
-    <section class="news">
-        <header>
-            <h2>Кошница</h2>
-        </header>
-        <article>
-            @if (Model == null)
-            {
-                <p>Нямате нищо в кошницата!</p>
-            }
-            else
-            {
-                <table>
+<section class="cart">
+    <header>
+        <h2>Кошница</h2>
+    </header>
+    <article>
+        @if (Model.CartProducts == null)
+        {
+            <p>Нямате нищо в кошницата!</p>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th colspan="3">Продукт</th>
+                    <th>Жанр</th>
+                    <th>Промоция</th>
+                    <th>Междинна сума</th>
+                    <th>Количество</th>
+                    <th colspan="2">Действия</th>
+                </tr>
+                @foreach (KeyValuePair<Product, int> cartItem in Model.CartProducts)
+                {
                     <tr>
-                        <th>Артист/група</th>
-                        <th>Заглавие</th>
-                        <th>Жанр</th>
-                        <th>Промоция</th>
-                        <th>Цена</th>
+                        <td>
+                            <img src="@cartItem.Key.VinylImgPath" alt="@cartItem.Key.Title" />
+                        </td>
+                        <td colspan="2">
+                            <p>@cartItem.Key.Artist</p>
+                            <p>@cartItem.Key.Title</p>
+                        </td>
+                        <td>@cartItem.Key.Genre.Name</td>
+                        <td>@(cartItem.Key.OnSale ? "Да" : "Не")</td>
+                        <td>@(cartItem.Key.Price * cartItem.Value) лв.</td>
+                        <td>@cartItem.Value</td>
+                        <td>
+                            <a href="/Cart/Add/@cartItem.Key.Id"><i class="fa fa-angle-up"></i></a>
+                            <a href="/Cart/RemoveByOne/@cartItem.Key.Id"><i class="fa fa-angle-down"></i></a>
+                        </td>
+                        <td>
+                            <a id="delete" href="/Cart/Remove/@cartItem.Key.Id">Изтрий</a>
+                        </td>
                     </tr>
-                    @foreach(KeyValuePair<Product, int> cartItem in Model.CartProducts)
+                }
+                @{
+                    decimal totalPrice = 0;
+                    foreach (KeyValuePair<Product, int> cartItem in Model.CartProducts)
                     {
-                        <tr>
-                            <td>@cartItem.Key.Artist</td>
-                            <td>@cartItem.Key.Title</td>
-                            <td>djaz</td>
-                            <td>@(cartItem.Key.OnSale ? "Да" : "Не")</td>
-                            <td>@(cartItem.Key.Price*cartItem.Value)</td>
-                        </tr>
+                        totalPrice += cartItem.Key.Price * cartItem.Value;
                     }
-                </table>
+                    Session[$"cartProducts{((User)Session["loggedUser"]).Id}"] = Model.CartProducts;
+                }
+                <tr>
+                    <td colspan="8">Обща сума: @totalPrice лв.</td>
+                    <td><a href="/Orders/MakeOrder">Поръчай</a></td>
+                </tr>
+            </table>
+        }
+    </article>
+</section>
+<section class="orders">
+    <header>
+        <h2>Поръчки</h2>
+    </header>
+    <article>
+        @if (Model.Orders == null || Model.Orders.Count == 0)
+        {
+            <div class="empty"><p>Нямате поръчки!</p></div>
+        }
+        else
+        {
+            decimal totalPrice = 0;
+            foreach (Order order in Model.Orders)
+            {
+                totalPrice = 0;
+                <div>
+                    <img src="~/Content/img/record.png" alt="Alternate Text" />
+                    <p>Поръчка №@order.Id</p>
+                    <p style="@(order.IsApproved ? "color: #91a1a5; !important" : "")">@(order.IsApproved ? "Одобрена" : "Неодобрена")</p>
+                    @foreach (OrderItem item in order.OrderItems)
+                    {
+                        totalPrice += item.UnitPrice * item.Quantity;
+                    }
+                    <p class="price">@totalPrice лв.</p>
+                    <a href="/Orders/Details/@order.Id">Детайли</a>
+                </div>
             }
-        </article>
-    </section>
+        }
+    </article>
+</section>

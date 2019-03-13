@@ -11,7 +11,7 @@ namespace VinylStore.Filters
     {
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            if (HttpContext.Current.Session["loggedUser"] != null && ((Entities.User)HttpContext.Current.Session["loggedUser"]).Id != 2)
+            if (HttpContext.Current.Session["loggedUser"] != null && ((Entities.User)HttpContext.Current.Session["loggedUser"]).Id != 1)
             {
                 base.HandleUnauthorizedRequest(filterContext);
             }

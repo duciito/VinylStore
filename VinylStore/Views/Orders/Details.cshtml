@@ -1,0 +1,53 @@
+﻿@model VinylStore.ViewModels.Orders.DetailsVM
+@{
+    string orderNum = Model.OrderId.ToString();
+    ViewBag.Title = $"Детайли за поръчка №{orderNum}";
+}
+
+@section styles
+{
+    <link href="~/Content/css/details.css" rel="stylesheet" />
+}
+
+    <section class="order">
+        <header>
+            <h2>Детайли за поръчка №@Model.OrderId</h2>
+        </header>
+        <article>
+            <table>
+                <tr>
+                    <th colspan="3">Продукт</th>
+                    <th>Жанр</th>
+                    <th>Промоция</th>
+                    <th>Междинна сума</th>
+                    <th>Количество</th>
+                </tr>
+                @foreach (KeyValuePair<Product, int> cartItem in Model.OrderProducts)
+                {
+                    <tr>
+                        <td>
+                            <img src="@cartItem.Key.VinylImgPath" alt="@cartItem.Key.Title" />
+                        </td>
+                        <td colspan="2">
+                            <p>@cartItem.Key.Artist</p>
+                            <p>@cartItem.Key.Title</p>
+                        </td>
+                        <td>@cartItem.Key.Genre.Name</td>
+                        <td>@(cartItem.Key.OnSale ? "Да" : "Не")</td>
+                        <td>@(cartItem.Key.Price * cartItem.Value) лв.</td>
+                        <td>@cartItem.Value</td>
+                    </tr>
+                }
+                    <tr>
+                        <td><a href="/Account/Index">Обратно</a></td>
+                        <td>@Model.OrderDate.ToString("dd/M/yyyy")</td>
+                        <td colspan=@(Model.IsApproved ? "5" : "4")>Обща сума: @Model.TotalPrice лв.</td>
+                        @if (!Model.IsApproved)
+                        {
+                            <td><a id="delete" href="/Orders/Delete/@Model.OrderId">Откажи</a></td>
+                        }
+                    </tr>
+            </table>
+        </article>
+    </section>
+

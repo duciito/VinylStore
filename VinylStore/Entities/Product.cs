@@ -17,5 +17,22 @@ namespace VinylStore.Entities
 
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }
+
+        public List<OrderItem> OrderItems { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var k = obj as Product;
+            if (k != null)
+            {
+                return this.Id == k.Id;
+            }
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }

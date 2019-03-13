@@ -16,7 +16,7 @@
             <a href="/Home/Index"><h1><i class="fa fa-bandcamp" aria-hidden="true"></i>contrabass</h1></a>
             <nav>
                 <ul>
-                    @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 2)
+                    @if (Session["loggedUser"] != null && ((User)Session["loggedUser"]).Id == 1)
                     {
                         <li>
                             <a href="/Account/AdminPanel">панел</a>
@@ -24,8 +24,14 @@
                     }
                     else if (Session["loggedUser"] != null)
                     {
+                        int badgeCount = 0;
+                        if (Session[$"cart{((User)Session["loggedUser"]).Id}"] != null)
+                        {
+                            badgeCount = ((Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"]).Sum(i => i.Value);
+                        }
+
                         <li>
-                            <a class="dynamic-badge" data-badge="@(Session[string.Format("cart{0}", ((User)Session["loggedUser"]).Id.ToString())] != null ? (((Dictionary<int, int>)Session[string.Format("cart{0}", ((User)Session["loggedUser"]).Id.ToString())]).Sum(x => x.Value)) : 0)" href="/Account/Index">профил</a>
+                            <a class="dynamic-badge" data-badge="@badgeCount" href="/Account/Index">профил</a>
                         </li>
                     }
                     <li><a href="/Products/Index">продукти</a></li>

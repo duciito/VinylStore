@@ -10,8 +10,8 @@ namespace VinylStore.Repositories
 {
     public class BaseRepository<T> where T : BaseEntity
     {
-        private DbContext context { get; set; }
-        private DbSet<T> items { get; set; }
+        protected DbContext context { get; set; }
+        protected DbSet<T> items { get; set; }
 
         public BaseRepository()
         {

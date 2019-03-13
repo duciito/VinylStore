@@ -18,19 +18,16 @@ namespace VinylStore.Controllers
             IndexVM model = new IndexVM();
             if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
             {
-                model = null;
+                model.CartProducts = null;
             }
             else
             {
-                ProductsRepository productsRepo = new ProductsRepository();
-                Dictionary<int, int> cart = (Dictionary<int, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
-                model.CartProducts = new Dictionary<Product, int>();
-
-                foreach (KeyValuePair<int, int> cartItem in cart)
-                {
-                    model.CartProducts.Add(productsRepo.GetById(cartItem.Key, includes: p => p.Genre), cartItem.Value);
-                }
+                model.CartProducts = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
             }
+
+            OrdersRepository ordersRepo = new OrdersRepository();
+            int userId = ((User)Session["loggedUser"]).Id;
+            model.Orders = ordersRepo.GetAll(o => o.UserId == userId, includes: o => o.OrderItems);
             
             return View(model);
         }

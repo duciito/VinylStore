@@ -114,6 +114,8 @@
     <Content Include="Content\css\products.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\profile.css" />
+    <Content Include="Content\css\details.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -122,9 +124,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Genre.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderItem.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
@@ -132,28 +137,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903072027152_InitialCreate.cs" />
-    <Compile Include="Migrations\201903072027152_InitialCreate.Designer.cs">
-      <DependentUpon>201903072027152_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903072114272_Initial.cs" />
-    <Compile Include="Migrations\201903072114272_Initial.Designer.cs">
-      <DependentUpon>201903072114272_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903101554128_Cart.cs" />
-    <Compile Include="Migrations\201903101554128_Cart.Designer.cs">
-      <DependentUpon>201903101554128_Cart.cs</DependentUpon>
+    <Compile Include="Migrations\201903121653417_Initial.cs" />
+    <Compile Include="Migrations\201903121653417_Initial.Designer.cs">
+      <DependentUpon>201903121653417_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\GenresRepository.cs" />
+    <Compile Include="Repositories\OrdersRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="Repositories\ProductsRepository.cs" />
     <Compile Include="Repositories\VinylStoreDbContext.cs" />
     <Compile Include="ViewModels\Account\IndexVM.cs" />
     <Compile Include="ViewModels\Account\LoginVM.cs" />
     <Compile Include="ViewModels\Account\RegisterVM.cs" />
+    <Compile Include="ViewModels\Orders\DetailsVM.cs" />
     <Compile Include="ViewModels\Products\EditVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +169,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -184,14 +184,8 @@
     <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903072027152_InitialCreate.resx">
-      <DependentUpon>201903072027152_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903072114272_Initial.resx">
-      <DependentUpon>201903072114272_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903101554128_Cart.resx">
-      <DependentUpon>201903101554128_Cart.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903121653417_Initial.resx">
+      <DependentUpon>201903121653417_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
