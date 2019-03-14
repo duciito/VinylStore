@@ -39,12 +39,35 @@
                     </tr>
                 }
                     <tr>
-                        <td><a href="/Account/Index">Обратно</a></td>
+                        <td><a class="back" href="/Account/@(((User)Session["loggedUser"]).Id == 1 ? "AdminPanel" : "Index")">Обратно</a></td>
                         <td>@Model.OrderDate.ToString("dd/M/yyyy")</td>
-                        <td colspan=@(Model.IsApproved ? "5" : "4")>Обща сума: @Model.TotalPrice лв.</td>
-                        @if (!Model.IsApproved)
+                        <td colspan="3">Обща сума: @Model.TotalPrice лв.</td>
+                        @if (((User)Session["loggedUser"]).Id == 1)
                         {
-                            <td><a id="delete" href="/Orders/Delete/@Model.OrderId">Откажи</a></td>
+                            <td>
+                                @if (!Model.IsApproved)
+                                {
+                                    <a href="/Orders/Approve/@Model.OrderId">Одобри</a>
+                                }
+                                else
+                                {
+                                    <span style="color: #91a1a5; !important; text-align: right;">Одобрена</span>
+                                }
+                            </td>
+                            <td><a id="delete" href="/Orders/Delete/@Model.OrderId">Изтрий</a></td>
+                        }
+                        else
+                        {
+                            <td colspan="2">
+                                @if (Model.IsApproved)
+                                {
+                                    <span style="color: #91a1a5; !important; text-align: right;">Одобрена</span>
+                                }
+                                else
+                                {
+                                    <a id="delete" href="/Orders/Delete/@Model.OrderId">Откажи</a>
+                                }
+                            </td>
                         }
                     </tr>
             </table>

@@ -24,6 +24,10 @@
     margin-left: 2rem;
 }
 
+.order table {
+    margin: 0;
+}
+
 .order table, .order tr:last-child td {
     text-align: right;
     border-bottom: none;
@@ -39,11 +43,8 @@
     height: auto;
 }
 
-.order a {
-    color: #91a1a5;
-}
-
-#delete {
+.order a:not(.back) {
+    background: #91a1a5;
     display: inline-block;
     padding: 0.6rem;
     appearance: button;
@@ -51,5 +52,12 @@
     outline: 0;
     border: 0;
     text-align: center;
+}
+
+.back {
+    color: #91a1a5;
+}
+
+#delete {
     background: #bd6151;
 }

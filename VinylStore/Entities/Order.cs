@@ -13,8 +13,8 @@ namespace VinylStore.Entities
         public bool IsApproved { get; set; }
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; }
+        public virtual List<OrderItem> OrderItems { get; set; }
     }
 }

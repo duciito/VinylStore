@@ -27,8 +27,21 @@ namespace VinylStore.Controllers
 
             OrdersRepository ordersRepo = new OrdersRepository();
             int userId = ((User)Session["loggedUser"]).Id;
-            model.Orders = ordersRepo.GetAll(o => o.UserId == userId, includes: o => o.OrderItems);
+            model.Orders = ordersRepo.GetAll(o => o.UserId == userId);
             
+            return View(model);
+        }
+
+        [AuthorizationFilter]
+        public ActionResult AdminPanel()
+        {
+            PanelVM model = new PanelVM();
+            UsersRepository usersRepo = new UsersRepository();
+            OrdersRepository ordersRepo = new OrdersRepository();
+
+            model.Users = usersRepo.GetAll();
+            model.Orders = ordersRepo.GetAll();
+
             return View(model);
         }
 
@@ -100,7 +113,7 @@ namespace VinylStore.Controllers
         public ActionResult Logout()
         {
             Session["loggedUser"] = null;
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

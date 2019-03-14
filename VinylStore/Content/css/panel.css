@@ -2,19 +2,19 @@
     text-align: center;
 }
 
-.cart > header {
+.users > header {
     margin-top: 5.5rem;
     padding-bottom: 3.3rem;
 }
 
-.cart article {
+.users article {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.cart table, th, td {
+.users table, th, td {
     background: #f7f3de;
     padding: 0.7rem;
     text-align: center;
@@ -24,21 +24,20 @@
     margin-left: 2rem;
 }
 
-.cart table {
+.users table {
     margin: 0;
 }
 
-.cart table, .cart tr:last-child td {
+.users table, .users tr:last-child td {
     text-align: right;
     border-bottom: none;
 }
 
-.cart img {
-    max-width: 6rem;
-    height: auto;
+.users i {
+    font-size: 3.2rem;
 }
 
-.cart a {
+.users a:not(.add) {
     display: inline-block;
     padding: 0.6rem;
     appearance: button;
@@ -49,9 +48,11 @@
     text-align: center;
 }
 
-#delete {
-    background: #bd6151;
+.add {
+    position: relative;
+    color: #91a1a5;
 }
+
 
 .orders > header {
     margin-top: 5.5rem;

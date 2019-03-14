@@ -16,9 +16,9 @@ namespace VinylStore.Entities
         public bool OnSale { get; set; }
 
         [ForeignKey("GenreId")]
-        public Genre Genre { get; set; }
+        public virtual Genre Genre { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; }
+        public virtual List<OrderItem> OrderItems { get; set; }
 
         public override bool Equals(object obj)
         {

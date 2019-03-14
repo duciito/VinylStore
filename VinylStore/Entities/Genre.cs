@@ -9,6 +9,6 @@ namespace VinylStore.Entities
     {
         public string Name { get; set; }
 
-        public List<Product> Vinyls { get; set; }
+        public virtual List<Product> Vinyls { get; set; }
     }
 }

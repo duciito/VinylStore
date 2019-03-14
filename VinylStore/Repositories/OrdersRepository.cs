@@ -10,8 +10,5 @@ namespace VinylStore.Repositories
 {
     public class OrdersRepository : BaseRepository<Order>
     {
-        public OrdersRepository()
-        {
-        }
     }
 }

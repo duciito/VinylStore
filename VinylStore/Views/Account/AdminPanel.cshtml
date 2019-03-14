@@ -1,0 +1,85 @@
+﻿@model VinylStore.ViewModels.Account.PanelVM
+@{
+    ViewBag.Title = "Админ панел";
+}
+
+@section styles
+{
+    <link href="~/Content/css/panel.css" rel="stylesheet" />
+}
+
+<section class="users">
+    <header>
+        <h2>
+            Потребители
+
+            <a class="add" href="/Users/Edit">(добави нов)</a>
+        </h2>
+    </header>
+    <article>
+        @if (Model.Users == null)
+        {
+            <p>Няма съществуващи потребители!</p>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Никнейм</th>
+                    <th>Име</th>
+                    <th>Фамилия</th>
+                    <th>Действия</th>
+                </tr>
+                @foreach (User user in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            <i class="fa fa-user"></i>
+                        </td>
+                        <td>@user.Username</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>
+                            <a href="/Users/Edit/@user.Id">Редактирай</a>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="5">Общо потребители: @Model.Users.Count()</td>
+                </tr>
+            </table>
+        }
+    </article>
+</section>
+<section class="orders">
+    <header>
+        <h2>Поръчки</h2>
+    </header>
+    <article>
+        @if (Model.Orders == null || Model.Orders.Count == 0)
+        {
+            <div class="empty"><p>Няма съществуващи поръчки!</p></div>
+        }
+        else
+        {
+            decimal totalPrice = 0;
+            foreach (Order order in Model.Orders)
+            {
+                totalPrice = 0;
+                <div>
+                    <img src="~/Content/img/record.png" alt="Alternate Text" />
+                    <p>Поръчка №@order.Id (от @order.User.Username)</p>
+                    <p style="@(order.IsApproved ? "color: #91a1a5; !important" : "")">@(order.IsApproved ? "Одобрена" : "Неодобрена")</p>
+                    @foreach (OrderItem item in order.OrderItems)
+                    {
+                        totalPrice += item.UnitPrice * item.Quantity;
+                    }
+                    <p class="price">@totalPrice лв.</p>
+                    <a href="/Orders/Details/@order.Id">Детайли</a>
+                </div>
+            }
+        }
+    </article>
+</section>
+

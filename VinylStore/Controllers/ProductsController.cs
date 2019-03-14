@@ -17,7 +17,7 @@ namespace VinylStore.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(new GenresRepository().GetAll(includes: g => g.Vinyls));
+            return View(new GenresRepository().GetAll());
         }
 
         public ActionResult Edit(int? id)
@@ -48,8 +48,18 @@ namespace VinylStore.Controllers
         [HttpPost]
         public ActionResult Edit(EditVM model)
         {
+            GenresRepository genresRepo = new GenresRepository();
             if (!ModelState.IsValid)
+            {
+                model.Genres = new SelectList
+            (
+                genresRepo.GetAll(),
+                "Id",
+                "Name",
+                model.GenreId
+            );
                 return View(model);
+            }
 
             ProductsRepository repo = new ProductsRepository();
             Product item = new Product();

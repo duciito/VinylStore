@@ -111,6 +111,7 @@
     <Content Include="Content\css\edit.css" />
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\panel.css" />
     <Content Include="Content\css\products.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\site.css" />
@@ -126,6 +127,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Order.cs" />
@@ -151,9 +153,11 @@
     <Compile Include="Repositories\VinylStoreDbContext.cs" />
     <Compile Include="ViewModels\Account\IndexVM.cs" />
     <Compile Include="ViewModels\Account\LoginVM.cs" />
+    <Compile Include="ViewModels\Account\PanelVM.cs" />
     <Compile Include="ViewModels\Account\RegisterVM.cs" />
     <Compile Include="ViewModels\Orders\DetailsVM.cs" />
     <Compile Include="ViewModels\Products\EditVM.cs" />
+    <Compile Include="ViewModels\Users\EditVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">
@@ -170,6 +174,8 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Account\AdminPanel.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

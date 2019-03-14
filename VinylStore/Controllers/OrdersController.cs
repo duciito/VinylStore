@@ -49,7 +49,7 @@ namespace VinylStore.Controllers
         public ActionResult Details(int id)
         {
             OrdersRepository ordersRepo = new OrdersRepository();
-            Order order = ordersRepo.GetById(id, includes: o => o.OrderItems);
+            Order order = ordersRepo.GetById(id);
             int loggedUserId = ((User)Session["loggedUser"]).Id;
 
             if (order == null)
@@ -62,7 +62,6 @@ namespace VinylStore.Controllers
                 return new HttpUnauthorizedResult("You can't view other users' orders!");
             }
 
-            ProductsRepository productsRepo = new ProductsRepository();
             DetailsVM model = new DetailsVM();
             model.OrderId = order.Id;
             model.OrderDate = order.OrderDate;
@@ -71,12 +70,34 @@ namespace VinylStore.Controllers
 
             foreach(OrderItem orderItem in order.OrderItems)
             {
-                Product product = productsRepo.GetById(orderItem.ProductId, includes: p => p.Genre);
-                model.OrderProducts.Add(product, orderItem.Quantity);
+                model.OrderProducts.Add(orderItem.Product, orderItem.Quantity);
                 model.TotalPrice += orderItem.UnitPrice * orderItem.Quantity;
             }
 
             return View(model);
+        }
+
+        [AuthorizationFilter]
+        public ActionResult Approve(int id)
+        {
+            OrdersRepository ordersRepo = new OrdersRepository();
+            Order order = ordersRepo.GetById(id);
+
+            order.IsApproved = true;
+            ordersRepo.Update(order);
+
+            return RedirectToAction("AdminPanel", "Account");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            OrdersRepository ordersRepo = new OrdersRepository();
+            Order order = ordersRepo.GetById(id);
+            int loggedUserId = ((User)Session["loggedUser"]).Id;
+
+            ordersRepo.Delete(order);
+
+            return RedirectToAction(loggedUserId == 1 ? "AdminPanel" : "Index", "Account");
         }
     }
 }

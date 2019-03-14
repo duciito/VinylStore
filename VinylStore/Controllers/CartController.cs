@@ -16,7 +16,7 @@ namespace VinylStore.Controllers
         public ActionResult Add(int id)
         {
             ProductsRepository repo = new ProductsRepository();
-            Product product = repo.GetById(id, includes: p => p.Genre);
+            Product product = repo.GetById(id);
 
             if (product == null)
             {
@@ -55,7 +55,7 @@ namespace VinylStore.Controllers
             }
 
             ProductsRepository repo = new ProductsRepository();
-            Product product = repo.GetById(id, includes: p => p.Genre);
+            Product product = repo.GetById(id);
             Dictionary<Product, int> cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
 
             if (cart.ContainsKey(product) && cart[product] > 1)
@@ -79,7 +79,7 @@ namespace VinylStore.Controllers
             }
 
             ProductsRepository repo = new ProductsRepository();
-            Product product = repo.GetById(id, includes: p => p.Genre);
+            Product product = repo.GetById(id);
             Dictionary<Product, int> cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
 
             if (cart.ContainsKey(product))

@@ -1,0 +1,56 @@
+﻿@model VinylStore.ViewModels.Users.EditVM
+@{
+    ViewBag.Title = "Редактирай потребител";
+}
+
+@section styles
+{
+    <link href="~/Content/css/edit.css" rel="stylesheet" />
+}
+
+<section id="form-container">
+    <header>
+        <i class="fa fa-user"></i>
+        <h2>Редактирай потребител</h2>
+    </header>
+
+
+    <div class="form">
+        <form action="/Users/Edit" method="post">
+            @Html.HiddenFor(m => m.Id)
+
+            <div class="input-group">
+                @Html.LabelFor(m => m.Username)
+                @Html.ValidationMessageFor(m => m.Username, null)
+                <div style="clear: both;"></div>
+                @Html.TextBoxFor(m => m.Username)
+            </div>
+
+            <div class="input-group">
+                @Html.LabelFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName, null)
+                <div style="clear: both;"></div>
+                @Html.TextBoxFor(m => m.FirstName)
+            </div>
+
+            <div class="input-group">
+                @Html.LabelFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName, null)
+                <div style="clear: both;"></div>
+                @Html.TextBoxFor(m => m.LastName)
+            </div>
+
+            <div class="input-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password, null)
+                <div style="clear: both;"></div>
+                @Html.PasswordFor(m => m.Password)
+            </div>
+
+
+            <button type="submit">Редактирай</button>
+            <button type="submit" formaction="/Users/Delete">Изтрий</button>
+        </form>
+    </div>
+    <p><a href="/Account/AdminPanel">Върни се обратно.</a></p>
+</section>
