@@ -16,12 +16,12 @@ namespace VinylStore.Controllers
         // GET: Orders
         public ActionResult MakeOrder()
         {
-            if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
+            if (Session["cart"] == null)
             {
                 return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
-            Dictionary<Product, int> cartProducts = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+            Dictionary<Product, int> cartProducts = (Dictionary<Product, int>)Session["cart"];
             Order order = new Order();
             OrdersRepository ordersRepo = new OrdersRepository();
 
@@ -41,7 +41,7 @@ namespace VinylStore.Controllers
             }
 
             ordersRepo.Insert(order);
-            Session[$"cart{((User)Session["loggedUser"]).Id}"] = null;
+            Session["cart"] = null;
 
             return RedirectToAction("Index", "Account");
         }

@@ -57,7 +57,7 @@
                     {
                         totalPrice += cartItem.Key.Price * cartItem.Value;
                     }
-                    Session[$"cartProducts{((User)Session["loggedUser"]).Id}"] = Model.CartProducts;
+                    Session["cartProducts"] = Model.CartProducts;
                 }
                 <tr>
                     <td colspan="8">Обща сума: @totalPrice лв.</td>

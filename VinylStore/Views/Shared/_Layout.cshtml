@@ -25,9 +25,9 @@
                     else if (Session["loggedUser"] != null)
                     {
                         int badgeCount = 0;
-                        if (Session[$"cart{((User)Session["loggedUser"]).Id}"] != null)
+                        if (Session["cart"] != null)
                         {
-                            badgeCount = ((Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"]).Sum(i => i.Value);
+                            badgeCount = ((Dictionary<Product, int>)Session["cart"]).Sum(i => i.Value);
                         }
 
                         <li>

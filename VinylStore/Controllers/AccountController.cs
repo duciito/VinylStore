@@ -16,13 +16,13 @@ namespace VinylStore.Controllers
         public ActionResult Index()
         {
             IndexVM model = new IndexVM();
-            if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
+            if (Session["cart"] == null)
             {
                 model.CartProducts = null;
             }
             else
             {
-                model.CartProducts = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+                model.CartProducts = (Dictionary<Product, int>)Session["cart"];
             }
 
             OrdersRepository ordersRepo = new OrdersRepository();

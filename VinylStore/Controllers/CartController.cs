@@ -24,15 +24,15 @@ namespace VinylStore.Controllers
             }
 
             Dictionary<Product, int> cart;
-            if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
+            if (Session["cart"] == null)
             {
                 cart = new Dictionary<Product, int>();
                 cart.Add(product, 1);
-                Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart;
+                Session["cart"] = cart;
             }
             else
             {
-                cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+                cart = (Dictionary<Product, int>)Session["cart"];
                 
                 if (cart.ContainsKey(product))
                 {
@@ -42,21 +42,21 @@ namespace VinylStore.Controllers
                 {
                     cart.Add(product, 1);
                 }
-                Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart;
+                Session["cart"] = cart;
             }
             return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult RemoveByOne(int id)
         {
-            if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
+            if (Session["cart"] == null)
             {
                 return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
             ProductsRepository repo = new ProductsRepository();
             Product product = repo.GetById(id);
-            Dictionary<Product, int> cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+            Dictionary<Product, int> cart = (Dictionary<Product, int>)Session["cart"];
 
             if (cart.ContainsKey(product) && cart[product] > 1)
             {
@@ -66,27 +66,27 @@ namespace VinylStore.Controllers
             {
                 return RedirectToAction("Remove", new { id = id });
             }
-            Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart;
+            Session["cart"] = cart;
 
             return RedirectToAction("Index", "Account");
         }
 
         public ActionResult Remove(int id)
         {
-            if (Session[$"cart{((User)Session["loggedUser"]).Id}"] == null)
+            if (Session["cart"] == null)
             {
                 return new HttpNotFoundResult("You haven't added anything to the cart yet!");
             }
 
             ProductsRepository repo = new ProductsRepository();
             Product product = repo.GetById(id);
-            Dictionary<Product, int> cart = (Dictionary<Product, int>)Session[$"cart{((User)Session["loggedUser"]).Id}"];
+            Dictionary<Product, int> cart = (Dictionary<Product, int>)Session["cart"];
 
             if (cart.ContainsKey(product))
             {
                 cart.Remove(product);
             }
-            Session[$"cart{((User)Session["loggedUser"]).Id}"] = cart.Count == 0 ? null : cart;
+            Session["cart"] = cart.Count == 0 ? null : cart;
 
             return RedirectToAction("Index", "Account");
         }
